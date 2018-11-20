@@ -24,7 +24,7 @@ int Dictionary::Add(int positionInsert, TableContent * row)
         if(positionInsert > 99)
                 return -404; // error - no space in table to insert
 
-        // search - da proverq rezultata dali q ima ili ne
+        // search - to check the result if it has it or not
 
         if(positionInsert < TableEnd-1)
         {
@@ -40,7 +40,7 @@ int Dictionary::Add(int positionInsert, TableContent * row)
                 strcpy(TableFromFile[positionInsert].English, row->English );
 
                 TableEnd++;
-                return 0;// uspeshno vuveden zapis
+                return 0;// successfully recorded entry
 
         }
         else if(positionInsert == TableEnd-1)
@@ -49,10 +49,10 @@ int Dictionary::Add(int positionInsert, TableContent * row)
                 strcpy(TableFromFile[TableEnd].English, row->English);
 
                 TableEnd++;
-                return 0;// uspeshno vuveden zapis
+                return 0;// successfully recorded entry
         }
 
-        return -1; // neuspeshno vuveden zapis
+        return -1; // unsuccessfully entered entry
 }
 
 int Dictionary::Delete(int positionDelete)
@@ -60,7 +60,7 @@ int Dictionary::Delete(int positionDelete)
           if(positionInsert < 0)
                 return -404; // error - no space in table to insert
 
-          // if(Search()) -- da proverq dali q ima ili nqma
+          // if(Search()) -- to check if there is one or not
           
           if(positionInsert < TableEnd-1)
           {
@@ -72,12 +72,12 @@ int Dictionary::Delete(int positionDelete)
                           strcpy(TableFromFile[i].English, TableFromFile[j].English);
                 }
 
-                // iztrivame posledniq otpadnal element
+                // delete the last dropped item
                 TableFromFile[i].Bulgarian[0] = 0;
                 TableFromFile[i].English[0] = 0;
 
                 TableEnd--;
-                return 0;// uspeshno vuveden zapis
+                return 0;// successfully recorded entry
           }
           else if(positionInsert == TableEnd-1)
           {
@@ -85,10 +85,10 @@ int Dictionary::Delete(int positionDelete)
                 TableFromFile[TableEnd].English[0] = 0;
 
                 TableEnd--;
-                return 0;// uspeshno vuveden zapis
+                return 0;// successfully recorded entry
           }
 
-          return -1; // neuspeshno vuveden zapis
+          return -1; // unsuccessfully entered entry
 }
 
 void Dictionary::printContentOfTable()
